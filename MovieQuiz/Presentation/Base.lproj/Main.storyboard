@@ -55,16 +55,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOo-LC-faF">
                                         <rect key="frame" x="0.0" y="624.5" width="374" height="89.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Q9-ZB-adf" userLabel="Question Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" showsExpansionTextWhenTruncated="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Q9-ZB-adf" userLabel="Question Label">
                                                 <rect key="frame" x="42" y="13" width="290" height="63.5"/>
                                                 <color key="backgroundColor" name="ypBlack"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="ypBlack"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="7Q9-ZB-adf" secondAttribute="bottom" constant="13" id="Dcr-Kn-6Ei"/>
                                             <constraint firstAttribute="trailing" secondItem="7Q9-ZB-adf" secondAttribute="trailing" constant="42" id="XQ6-7i-U1X"/>
@@ -127,7 +126,6 @@
                         <constraints>
                             <constraint firstItem="mvz-Y4-Zaa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VlD-g1-uHY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mvz-Y4-Zaa" secondAttribute="trailing" constant="20" id="aPJ-1A-3M4"/>
-                            <constraint firstItem="mvz-Y4-Zaa" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="anO-9D-XsV"/>
                             <constraint firstItem="mvz-Y4-Zaa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="eu6-x5-357"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -149,7 +147,7 @@
     </scenes>
     <resources>
         <namedColor name="ypBlack">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
