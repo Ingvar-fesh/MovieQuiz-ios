@@ -1,13 +1,11 @@
 import UIKit
 
-// для состояния "Вопрос задан"
 struct QuizStepViewModel {
   let image: UIImage
   let question: String
   let questionNumber: String
 }
 
-// для состояния "Результат квиза"
 struct QuizResultsViewModel {
   let title: String
   let text: String
@@ -22,6 +20,12 @@ struct QuizQuestion {
 
 final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var questionText: UILabel!
+    @IBOutlet private var counterLabel: UILabel!
+    
+    private var currentQuestionIndex = 0
+    private var correctAnswers = 0
     
     
     override func viewDidLoad() {
@@ -40,15 +44,9 @@ final class MovieQuizViewController: UIViewController {
     QuizQuestion(image: "Old", text: "Рейтинг этого фильма больше чем 6?", correctAnswer: false),
     QuizQuestion(image: "The Ice Age Adventures of Buck Wild", text: "Рейтинг этого фильма больше чем 6?", correctAnswer: false),
     QuizQuestion(image: "Tesla", text: "Рейтинг этого фильма больше чем 6?", correctAnswer: false),
-    QuizQuestion(image: "Vivarium", text: "Рейтинг этого фильма больше чем 6?", correctAnswer: false)]
-    
-    @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var questionText: UILabel!
-    @IBOutlet private var counterLabel: UILabel!
-    
-    private var currentQuestionIndex = 0
-    private var correctAnswers = 0
-    
+    QuizQuestion(image: "Vivarium", text: "Рейтинг этого фильма больше чем 6?", correctAnswer: false)
+    ]
+
     @IBAction private func noButtonClicked(_ sender: Any) {
         showAnswerResult(isCorrect: false == questions[currentQuestionIndex].correctAnswer)
     }
