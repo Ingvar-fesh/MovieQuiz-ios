@@ -6,7 +6,7 @@ struct GameRecord: Codable {
     let date: Date
     
     func compareResults(current: GameRecord) -> Bool {
-        return current.correct > self.correct ? true : false
+        return current.correct > self.correct
     }
 }
 

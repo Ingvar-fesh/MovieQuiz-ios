@@ -59,40 +59,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         super.viewDidLoad()
         questionFactory.delegate = self
         questionFactory.requestQuestion()
-        
-        //var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        //print(documentsURL.scheme)
-        //print(documentsURL.path)
-        
-        /*let fileName = "test.txt"
-        documentsURL.appendPathComponent(fileName)
-        if (!FileManager.default.fileExists(atPath: documentsURL.path)) {
-            let hello = "Hello world"
-            let data = hello.data(using: .utf8)
-            FileManager.default.createFile(atPath: documentsURL.path, contents: data)
-        } */
-        
-        /*documentsURL.deleteLastPathComponent()
-        let jsonFile = "inception.json"
-        documentsURL.appendPathComponent(jsonFile)
-        let jsonString = try? (String(contentsOf: documentsURL))
-        let data = jsonString?.data(using: .utf8)
-        
-        do {
-            let movie = try JSONDecoder().decode(Movie.self, from: data!)
-        } catch {
-            print("Failed to parse: \(error.localizedDescription)")
-        } */
-        
-        /*documentsURL.deleteLastPathComponent()
-        let jsonFile = "top250MoviesIMDB.json"
-        documentsURL.appendPathComponent(jsonFile)
-        let jsonString = try? (String(contentsOf: documentsURL))
-        let data = jsonString?.data(using: .utf8)
-        do {
-            let result = try? JSONDecoder().decode(Top.self, from: data!)
-            print(result!.items)
-        } */
     }
     
     func didReceiveNextQuestion(question: QuizQuestion?) {
@@ -111,14 +77,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        showAnswerResult(isCorrect: false == currentQuestion.correctAnswer)
+        showAnswerResult(isCorrect: !currentQuestion.correctAnswer)
     }
     
     @IBAction private func yesButtonClicked(_ sender: Any) {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        showAnswerResult(isCorrect: true == currentQuestion.correctAnswer)
+        showAnswerResult(isCorrect: currentQuestion.correctAnswer)
     }
     
     private func show(quiz step: QuizStepViewModel) {
