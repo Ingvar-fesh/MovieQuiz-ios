@@ -125,12 +125,17 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-FB-7eX">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="ypBlack"/>
                         <constraints>
+                            <constraint firstItem="VuK-FB-7eX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0j3-dM-s3g"/>
                             <constraint firstItem="mvz-Y4-Zaa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VlD-g1-uHY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mvz-Y4-Zaa" secondAttribute="trailing" constant="20" id="aPJ-1A-3M4"/>
+                            <constraint firstItem="VuK-FB-7eX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ch0-dL-f9u"/>
                             <constraint firstItem="mvz-Y4-Zaa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="eu6-x5-357"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -140,6 +145,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="VuK-FB-7eX" id="zef-9c-9yv"/>
                         <outlet property="counterLabel" destination="x16-qO-dKA" id="Cra-xt-3vV"/>
                         <outlet property="imageView" destination="bvT-Pz-BcV" id="BOr-qP-0VA"/>
                         <outlet property="questionText" destination="7Q9-ZB-adf" id="Kw3-Fm-27z"/>
