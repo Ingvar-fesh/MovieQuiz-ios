@@ -48,13 +48,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private var counterLabel: UILabel!
     
-    private var currentQuestionIndex = 0
     private var correctAnswers = 0
-    private let questionsAmount = 10
     
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private var statisticService: StatisticService?
+    
+    private let presenter = MovieQuizPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +72,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             return
         }
         currentQuestion = question
-        let viewModel = convert(model: question)
+        let viewModel = presenter.convert(model: question)
         DispatchQueue.main.async { [weak self] in
             self?.show(quiz: viewModel)
         }
@@ -117,15 +117,15 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func show(quiz result: QuizResultsViewModel) {
-        if currentQuestionIndex == questionsAmount - 1 {
-            statisticService?.store(correct: correctAnswers, total: questionsAmount)
+        if presenter.isLastQuestion() {
+            statisticService?.store(correct: correctAnswers, total: presenter.questionsAmount)
             
             guard let gamesCount = statisticService?.gamesCount else { return }
             guard let bestGame = statisticService?.bestGame else { return }
             guard let totalAccuracy = statisticService?.totalAccuracy else { return }
             
             let text = """
-        Ваш результат: \(correctAnswers)/\(questionsAmount)
+        Ваш результат: \(correctAnswers)/\(presenter.questionsAmount)
         Количество сыгранных квизов: \(gamesCount)
         Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
         Средняя точность: \(String(format: "%.2f", totalAccuracy))%
@@ -134,7 +134,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             AlertPresenter(delegate: self).showResult(alertModel: AlertModel(title: result.title,
                                                                              message: text,
                                                                              buttonText: result.buttonText) { [weak self] in
-                self?.currentQuestionIndex = 0
+                self?.presenter.resetQuestionIndex()
                 self?.correctAnswers = 0
                 self?.questionFactory?.requestNextQuestion()
             })
@@ -146,7 +146,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         AlertPresenter(delegate: self).showResult(alertModel: AlertModel(title: "Ошибка",
                                                                          message: message,
                                                                          buttonText: "Попробовать ещё раз") { [weak self] in
-            self?.currentQuestionIndex = 0
+            self?.presenter.resetQuestionIndex()
             self?.correctAnswers = 0
             self?.questionFactory?.requestNextQuestion()
         })
@@ -174,15 +174,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         }
     }
     
-    private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        
-        return QuizStepViewModel(image: UIImage(data: model.image) ?? UIImage(),
-                                 question: model.text,
-                                 questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
-    }
-    
     private func showNextQuestionOrResults() {
-        if currentQuestionIndex == questionsAmount - 1 {
+        if presenter.isLastQuestion() {
             imageView.layer.borderWidth = 0
             let text = "Ваш результат: \(correctAnswers) из 10"
             let viewModel = QuizResultsViewModel(
@@ -192,7 +185,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             show(quiz: viewModel)
         } else {
             imageView.layer.borderWidth = 0
-            currentQuestionIndex += 1
+            presenter.switchToNextQuestion()
             questionFactory?.requestNextQuestion()
         }
     }
